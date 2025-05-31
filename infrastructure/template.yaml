@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Pokerpoint DNS Stack
+Transform: [ AWS::LanguageExtensions, AWS::Serverless-2016-10-31 ]
+
+Resources:
+  RootHostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: pokerpoint.co.uk
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+
+Outputs:
+  HostedZoneId:
+    Value: !GetAtt RootHostedZone.Id
+    Export:
+      Name: !Sub ${AWS::StackName}-ZoneId
